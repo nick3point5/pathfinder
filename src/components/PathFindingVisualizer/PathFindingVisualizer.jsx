@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 import { Node } from '@/components'
 
 const nodesInit = []
-const rows = 15
+const rows = 20
 const columns = 50
 const isStart = (row, column) => row === 10 && column === 5
-const isFinish = (row, column) => row === 10 && column === 45
+const isEnd = (row, column) => row === 10 && column === 45
 
 for (let row = 0; row < rows; row++) {
 	const currentRow = []
@@ -15,7 +15,7 @@ for (let row = 0; row < rows; row++) {
 			column,
 			row,
 			isStart: isStart(row, column),
-			isFinish: isFinish(row, column),
+			isEnd: isEnd(row, column),
 		}
 		currentRow.push(currentNode)
 	}
@@ -32,8 +32,8 @@ export function PathFindingVisualizer(props) {
 					return (
 						<div className='grid-row' key={rowIdx}>
 							{row.map((node, nodeIdx) => {
-								const {isStart, isFinish} = node
-								return <Node key={nodeIdx} isStart={isStart} isFinish={isFinish} />
+								const {isStart, isEnd} = node
+								return <Node key={nodeIdx} isStart={isStart} isEnd={isEnd} />
 							})}
 						</div>
 					)

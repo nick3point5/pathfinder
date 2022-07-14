@@ -1,12 +1,13 @@
 import './Node.css'
 
-export function Node({ isStart, isFinish }) {
+export function Node({ isStart, isEnd }) {
 	let classes = 'Node'
 	if (isStart) {
 		classes += ' start'
 	}
-	if (isFinish) {
-		classes += ' finish'
+	console.log(isEnd)
+	if (isEnd) {
+		classes += ' end'
 	}
 	return <div className={classes}></div>
 }
