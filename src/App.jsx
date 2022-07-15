@@ -1,11 +1,11 @@
 import './App.css'
-import { PathFindingVisualizer } from '@/components'
+import { Grid } from '@/components'
 
 function App() {
 
 	return (
 		<div className='App'>
-			<PathFindingVisualizer/>
+			<Grid/>
 		</div>
 	)
 }

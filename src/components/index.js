@@ -1,1 +1,1 @@
-export * from './PathFindingVisualizer';
+export * from './Grid';
