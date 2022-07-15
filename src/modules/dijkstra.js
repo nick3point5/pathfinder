@@ -1,11 +1,13 @@
+import {MinHeap} from '@/modules'
+
 export function dijkstra(grid, startNode, endNode) {
 	const visitedNodesInOrder = []
 	startNode.distance = 0
 	const unvisitedNodes = getAllNodes(grid)
+	const heap = new MinHeap(unvisitedNodes,(node) => node?.distance)
 
 	while (!!unvisitedNodes.length) {
-		sortByDistance(unvisitedNodes)
-		const closestNode = unvisitedNodes.shift()
+		const closestNode = heap.remove()
 		if (closestNode.isWall) continue
 
 		if (closestNode.distance === Infinity) return visitedNodesInOrder
@@ -24,11 +26,7 @@ function getAllNodes(grid) {
 	return allNodes
 }
 
-function sortByDistance(nodes) {
-	nodes.sort((current, next) => current.distance - next.distance)
-}
-
-function updateUnvisitedNeighbors(node, grid) {
+function updateUnvisitedNeighbors(node) {
 	const unvisitedNeighbors = getUnVisitedNeighbors(node)
 	unvisitedNeighbors.forEach((neighbor)=> {
 		neighbor.distance = node.distance + 1

@@ -13,6 +13,7 @@ export function Grid(props) {
 		const endNode = grid[end[0]][end[1]]
 		const visitedNodesInOrder = dijkstra(grid, startNode, endNode)
 		const shortestPathOrder = getShortestPath(endNode)
+		console.log(visitedNodesInOrder)
 	}
 
 	useEffect(() => {
