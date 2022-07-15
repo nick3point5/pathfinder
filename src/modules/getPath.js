@@ -1,4 +1,4 @@
-export function getShortestPath(finishNode) {
+export function getPath(finishNode) {
 	const shortestPath = []
 	let node = finishNode
 	while(node !== null) {

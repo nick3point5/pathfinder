@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+
 export function  generateGrid(start, end) {
 	const grid = []
 	const rows = 20
@@ -13,6 +15,7 @@ export function  generateGrid(start, end) {
 			this.isWall = false
 			this.previousNode = null
 			this.neighbors = []
+			// this.element = useRef(null)
 		}
 	}
 
