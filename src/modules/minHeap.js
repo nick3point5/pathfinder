@@ -73,16 +73,27 @@ export class MinHeap {
 	}
 
 	insert(val) {
-		this.heap.push(val)
-		this.siftUp(this.heap.length - 1)
+		this.heap.unshift(val)
+		this.siftDown(0)
 	}
 
 	remove() {
-		const min = this.heap[0]
+		const min = this.heap.shift()
+		const max = this.heap.pop()
 
-		this.heap[0] = this.heap.pop()
+		if(max === undefined) return min
+
+		this.heap[0] = max
 		this.siftDown(0)
 
 		return min
+	}
+
+	peek() {
+		return this.heap[0]
+	}
+
+	toArray() {
+		return this.heap
 	}
 }

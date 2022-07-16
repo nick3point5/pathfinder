@@ -7,9 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-		"index": "node ./tools/indexer.js ./src/components -r && node ./tools/indexer.js ./src/modules -r "
+    "index": "node ./tools/indexer.js ./src/components -r && node ./tools/indexer.js ./src/modules -r "
   },
   "dependencies": {
+    "heap-js": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

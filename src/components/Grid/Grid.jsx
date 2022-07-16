@@ -1,12 +1,12 @@
 import './Grid.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Node } from '@/components'
 import { dijkstra, generateGrid, getShortestPath } from '@/modules'
 
 export function Grid(props) {
 	const [start, setStart] = useState([10, 5])
 	const [end, setEnd] = useState([10, 45])
-	const [grid, setGrid] = useState(generateGrid(start, end))
+	const [grid, setGrid] = useState(generateGrid(start, end, 20, 50))
 
 	function runDijkstra() {
 		const startNode = grid[start[0]][start[1]]
@@ -16,7 +16,7 @@ export function Grid(props) {
 		console.log(visitedNodesInOrder)
 	}
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const path = runDijkstra()
 	}, [])
 

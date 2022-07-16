@@ -1,7 +1,6 @@
-export function  generateGrid(start, end) {
+export function generateGrid(start, end, rows, columns) {
 	const grid = []
-	const rows = 20
-	const columns = 50
+
 	class PathNode {
 		constructor(row, column) {
 			this.row = row
@@ -31,7 +30,7 @@ export function  generateGrid(start, end) {
 		for (let column = 0; column < columns; column++) {
 			const currentNode = grid[row][column]
 			//add right neighbor
-			if (column < columns) {
+			if (column < columns - 1) {
 				const right = grid[row][column + 1]
 				currentNode.neighbors.push(right)
 			}
