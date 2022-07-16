@@ -16,11 +16,6 @@ export function Grid(props) {
 		animate(visitedOrder, pathOrder, 1)
 	}
 
-<<<<<<< HEAD
-	useLayoutEffect(() => {
-		const path = runDijkstra()
-	}, [])
-=======
 	function animate(visitedOrder, pathOrder, speedFactor) {
 		const speed = 20/speedFactor
 		for (let i = 0; i < visitedOrder.length; i++) {
@@ -38,7 +33,6 @@ export function Grid(props) {
 			}, speed * (i + visitedOrder.length))
 		}
 	}
->>>>>>> animate
 
 	return (
 		<div className='Grid'>
