@@ -5,10 +5,11 @@ export function dijkstra(startNode, endNode) {
 	startNode.distance = 0
 	const minHeap = new Heap((a, b) => {
 		const diff = a.distance - b.distance
-		if(diff === 0) return -1
+		if(diff === 0) return 1
 		return diff
 	});
 	minHeap.push(startNode)
+
 
 	while (!!minHeap.heapArray.length) {
 		const closestNode = minHeap.pop()

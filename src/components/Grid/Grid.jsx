@@ -3,24 +3,26 @@ import { useEffect, useRef, useState } from 'react'
 import { Node } from '@/components'
 import { dijkstra, generateGrid, getPath } from '@/modules'
 
-export function Grid(props) {
+export function Grid({ isMouseDown }) {
 	const [start, setStart] = useState([10, 5])
 	const [end, setEnd] = useState([10, 45])
 	const [rows, setRows] = useState(20)
 	const [columns, setColumns] = useState(50)
 	const [grid, setGrid] = useState(generateGrid(start, end, rows, columns))
+	const isCalculated = useRef(false)
 	const timeouts = useRef([])
 
 	function runDijkstra() {
 		const startNode = grid[start[0]][start[1]]
 		const endNode = grid[end[0]][end[1]]
-		const visitedOrder = dijkstra(grid, startNode, endNode)
+		const visitedOrder = dijkstra(startNode, endNode)
 		const pathOrder = getPath(endNode)
-		animate(visitedOrder, pathOrder, 1)
+		isCalculated.current = true
+		animate(visitedOrder, pathOrder, 10)
 	}
 
 	function animate(visitedOrder, pathOrder, speedFactor) {
-		const speed = 20/speedFactor
+		const speed = 20 / speedFactor
 		const timeoutsArray = timeouts.current
 		for (let i = 0; i < visitedOrder.length; i++) {
 			const timeout = setTimeout(() => {
@@ -41,21 +43,42 @@ export function Grid(props) {
 	}
 
 	function resetGrid() {
-		timeouts.current.forEach(timeout=> {
+		while(!timeouts.current.length) {
+			const timeout = timeouts.current.pop()
 			clearTimeout(timeout)
-		})
+		}
 
-		grid.forEach(rows => {
-			rows.forEach(node => {
+		grid.forEach((rows) => {
+			rows.forEach((node) => {
 				const element = node.element.current
 				element.classList.remove('node-visited')
 				element.classList.remove('node-path')
+				element.classList.remove('wall')
+
+				node.isWall = false
 			})
 		})
 
 		const freshGrid = generateGrid(start, end, rows, columns)
-	
+
 		setGrid(freshGrid)
+	}
+
+	function mouseDownHandler(event, node) {
+		event.preventDefault()
+		const element = node.element.current
+		element.classList.toggle('wall')
+
+		node.isWall = !node.isWall
+	}
+
+	function mouseEnterHandler(event, node) {
+		if (!isMouseDown.current) return
+		if (node.isStart) return
+		if (node.isEnd) return
+		const element = node.element.current
+		element.classList.toggle('wall')
+		node.isWall = !node.isWall
 	}
 
 	return (
@@ -66,16 +89,21 @@ export function Grid(props) {
 						<div className='grid-row' key={rowIdx}>
 							{row.map((node, nodeIdx) => {
 								const { isStart, isEnd } = node
-								return <Node key={nodeIdx} node={node} />
+								return (
+									<Node
+										key={nodeIdx}
+										node={node}
+										mouseDownHandler={mouseDownHandler}
+										mouseEnterHandler={mouseEnterHandler}
+									/>
+								)
 							})}
 						</div>
 					)
 				})}
 			</div>
 			<button onClick={runDijkstra}>Dijkstra</button>
-			<button onClick={resetGrid}>
-        Reset
-      </button>
+			<button onClick={resetGrid}>Reset</button>
 		</div>
 	)
 }
