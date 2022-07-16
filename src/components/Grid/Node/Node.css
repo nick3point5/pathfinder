@@ -4,6 +4,14 @@
 	height: 20px;
 }
 
+.node-visited {
+	background-color:aqua;
+}
+
+.node-path {
+	background-color: yellow
+}
+
 .start {
 	background-color: green;
 }

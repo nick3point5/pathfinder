@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 export function generateGrid(start, end, rows, columns) {
+=======
+import { useRef } from 'react'
+
+export function  generateGrid(start, end) {
+>>>>>>> animate
 	const grid = []
 
 	class PathNode {
@@ -12,6 +18,7 @@ export function generateGrid(start, end, rows, columns) {
 			this.isWall = false
 			this.previousNode = null
 			this.neighbors = []
+			this.element = useRef(null)
 		}
 	}
 

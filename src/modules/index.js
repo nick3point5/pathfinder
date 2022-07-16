@@ -1,4 +1,4 @@
 export { dijkstra } from './dijkstra';
 export { generateGrid } from './generateGrid';
-export { getShortestPath } from './getShortestPath';
+export { getPath } from './getPath';
 export { MinHeap } from './MinHeap';
