@@ -14,7 +14,7 @@ export function  generateGrid(start, end, rows, columns) {
 			this.isWall = false
 			this.previousNode = null
 			this.neighbors = []
-			this.element = useRef(null)
+			this.element = null
 		}
 	}
 
