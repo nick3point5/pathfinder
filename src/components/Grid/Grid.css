@@ -1,3 +1,4 @@
 .Grid {
-	
+	display: flex;
+	flex-direction: column;
 }

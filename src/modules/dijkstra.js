@@ -4,10 +4,11 @@ export function dijkstra(grid, startNode, endNode) {
 	const visitedNodesInOrder = []
 	startNode.distance = 0
 	const unvisitedNodes = getAllNodes(grid)
-	const heap = new MinHeap(unvisitedNodes,(node) => node?.distance)
+	// const heap = new MinHeap(unvisitedNodes,(node) => node?.distance)
 
 	while (!!unvisitedNodes.length) {
-		const closestNode = heap.remove()
+		sortByDistance(unvisitedNodes)
+		const closestNode = unvisitedNodes.shift()
 		if (closestNode.isWall) continue
 
 		if (closestNode.distance === Infinity) return visitedNodesInOrder
@@ -16,6 +17,10 @@ export function dijkstra(grid, startNode, endNode) {
 		if (closestNode === endNode) return visitedNodesInOrder
 		updateUnvisitedNeighbors(closestNode, grid)
 	}
+}
+
+function sortByDistance(nodes) {
+	nodes.sort((current, next) => current.distance - next.distance)
 }
 
 function getAllNodes(grid) {

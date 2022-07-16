@@ -15,7 +15,7 @@ export function  generateGrid(start, end) {
 			this.isWall = false
 			this.previousNode = null
 			this.neighbors = []
-			// this.element = useRef(null)
+			this.element = useRef(null)
 		}
 	}
 
@@ -34,7 +34,7 @@ export function  generateGrid(start, end) {
 		for (let column = 0; column < columns; column++) {
 			const currentNode = grid[row][column]
 			//add right neighbor
-			if (column < columns) {
+			if (column < columns - 1) {
 				const right = grid[row][column + 1]
 				currentNode.neighbors.push(right)
 			}
