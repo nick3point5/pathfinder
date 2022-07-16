@@ -11,10 +11,12 @@ export function  generateGrid(start, end, rows, columns) {
 			this.isEnd = row === end[0] && column === end[1]
 			this.distance = Infinity
 			this.isVisited = false
+			this.isVisitable = false
 			this.isWall = false
 			this.previousNode = null
 			this.neighbors = []
 			this.element = null
+			this.weight = 1
 		}
 	}
 

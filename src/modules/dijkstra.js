@@ -1,44 +1,39 @@
-import {MinHeap} from '@/modules'
 import Heap from 'heap-js';
 
-
-
-export function dijkstra(grid, startNode, endNode) {
+export function dijkstra(startNode, endNode) {
 	const visitedNodesInOrder = []
 	startNode.distance = 0
-	const unvisitedNodes = getAllNodes(grid)
-	// const heap = new MinHeap(unvisitedNodes,(node) => node?.distance)
+	const minHeap = new Heap((a, b) => {
+		const diff = a.distance - b.distance
+		if(diff === 0) return -1
+		return diff
+	});
+	minHeap.push(startNode)
 
-	while (!!unvisitedNodes.length) {
-		sortByDistance(unvisitedNodes)
-		const closestNode = unvisitedNodes.shift()
-		if (closestNode.isWall) continue
+	while (!!minHeap.heapArray.length) {
+		const closestNode = minHeap.pop()
 
-		if (closestNode.distance === Infinity) return visitedNodesInOrder
 		closestNode.isVisited = true
 		visitedNodesInOrder.push(closestNode)
-		if (closestNode === endNode) return visitedNodesInOrder
-		updateUnvisitedNeighbors(closestNode)
+
+		if (closestNode === endNode) {
+			return visitedNodesInOrder
+		}
+		updateUnvisitedNeighbors(closestNode,minHeap)
 	}
+
+	return visitedNodesInOrder
 }
 
-function sortByDistance(nodes) {
-	nodes.sort((current, next) => current.distance - next.distance)
-}
-
-function getAllNodes(grid) {
-	let allNodes = []
-	for (const row of grid) {
-		allNodes = allNodes.concat(row)
-	}
-	return allNodes
-}
-
-function updateUnvisitedNeighbors(node) {
+function updateUnvisitedNeighbors(node,minHeap) {
 	const unvisitedNeighbors = getUnVisitedNeighbors(node)
 	unvisitedNeighbors.forEach((neighbor)=> {
-		neighbor.distance = node.distance + 1
+		neighbor.distance = node.distance + neighbor.weight
 		neighbor.previousNode = node
+		if(!neighbor.isVisitable && !neighbor.isWall) {
+			neighbor.isVisitable = true
+			minHeap.push(neighbor)
+		} 
 	})
 }
 
