@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 
-export function  generateGrid(start, end) {
+export function  generateGrid(start, end, rows, columns) {
 	const grid = []
 
 	class PathNode {
