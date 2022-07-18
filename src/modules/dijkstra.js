@@ -1,18 +1,16 @@
-import Heap from 'heap-js';
+import { Heap } from '@/modules'
 
 export function dijkstra(startNode, endNode) {
 	const visitedNodesInOrder = []
 	startNode.distance = 0
-	const minHeap = new Heap((a, b) => {
-		const diff = a.distance - b.distance
-		if(diff === 0) return 1
-		return diff
-	});
+	const minHeap = new Heap((a, b) => (a.distance < b.distance));
+
+	minHeap.push(startNode)
 	minHeap.push(startNode)
 
-
-	while (!!minHeap.heapArray.length) {
+	while (!!minHeap.size()) {
 		const closestNode = minHeap.pop()
+		
 
 		closestNode.isVisited = true
 		visitedNodesInOrder.push(closestNode)

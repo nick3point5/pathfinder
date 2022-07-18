@@ -1,9 +1,9 @@
-import './Dijkstra.css'
+import './Home.css'
 import { Grid } from '@/components'
 import { useRef, useState } from 'react'
-import { dijkstra, generateGrid, getPath, animateSearch } from '@/modules'
+import { dijkstra, aStar, generateGrid, getPath, animateSearch } from '@/modules'
 
-export function Dijkstra(props) {
+export function Home(props) {
 	const [start, setStart] = useState([10, 5])
 	const [end, setEnd] = useState([10, 45])
 	const [rows, setRows] = useState(20)
@@ -16,14 +16,14 @@ export function Dijkstra(props) {
 	function runSearch() {
 		const startNode = grid[start[0]][start[1]]
 		const endNode = grid[end[0]][end[1]]
-		const visitedOrder = dijkstra(startNode, endNode)
+		const visitedOrder = aStar(startNode, endNode,grid)
 		const pathOrder = getPath(endNode)
 		isCalculated.current = true
 		animateSearch(visitedOrder, pathOrder, timeouts, 10)
 	}
 
 	function resetGrid() {
-		while (!timeouts.current.length) {
+		while (!!timeouts.current.length) {
 			const timeout = timeouts.current.pop()
 			clearTimeout(timeout)
 		}
