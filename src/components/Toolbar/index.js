@@ -1,4 +1,4 @@
 export { Toolbar } from './Toolbar';
 
-export * from './FormInput';
+export * from './FormInputNumber';
 export * from './FormSelect';

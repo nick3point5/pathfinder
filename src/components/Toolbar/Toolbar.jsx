@@ -1,7 +1,7 @@
 import './Toolbar.css'
 import { useRef, useState } from 'react'
 import { algorithm, getPath, animateSearch, generateGrid } from '@/modules'
-import { FormInput, FormSelect } from '@/components'
+import { FormInputNumber, FormSelect } from '@/components'
 
 export function Toolbar({ grid, setGrid, isCalculated, start, end }) {
 	const [rows, setRows] = useState(20)
@@ -10,8 +10,9 @@ export function Toolbar({ grid, setGrid, isCalculated, start, end }) {
 	const [speed, setSpeed] = useState(100)
 	const timeouts = useRef([])
 
-	function runSearch() {
-		// console.log(startNode, endNode, grid, algorithmType)
+	function runSearch(event) {
+		event.preventDefault()
+		resetSearch(event)
 		const startNode = grid[start[0]][start[1]]
 		const endNode = grid[end[0]][end[1]]
 		console.log(start)
@@ -21,7 +22,8 @@ export function Toolbar({ grid, setGrid, isCalculated, start, end }) {
 		animateSearch(visitedOrder, pathOrder, timeouts, speed)
 	}
 
-	function resetGrid() {
+	function resetGrid(event) {
+		event.preventDefault()
 		while (!!timeouts.current.length) {
 			const timeout = timeouts.current.pop()
 			clearTimeout(timeout)
@@ -45,7 +47,8 @@ export function Toolbar({ grid, setGrid, isCalculated, start, end }) {
 		setGrid(freshGrid)
 	}
 
-	function resetSearch() {
+	function resetSearch(event) {
+		event.preventDefault()
 		while (!!timeouts.current.length) {
 			const timeout = timeouts.current.pop()
 			clearTimeout(timeout)
@@ -66,25 +69,26 @@ export function Toolbar({ grid, setGrid, isCalculated, start, end }) {
 		isCalculated.current = false
 	}
 
-	function handleApply(event) {
-		event.preventDefault()
-		resetGrid()
-	}
-	function handleInput(event, setValue) {
-		event.preventDefault()
-		const { value } = event.target
-		setValue(value)
-	}
+
 	return (
 		<div className={`Toolbar`}>
-			<button onClick={runSearch}>Run</button>
-			<button onClick={resetGrid}>Reset</button>
 			<form>
-				<FormInput label={'rows'} value={rows} setValue={setRows}/>
-				<FormInput label={'columns'} value={columns} setValue={setColumns}/>
-				<FormInput label={'speed'} value={speed} setValue={setSpeed}/>
-				<FormSelect label={'algorithm'} value={algorithmType} setValue={setAlgorithmType}/>
-				<button onClick={handleApply}>apply</button>
+				<FormSelect
+					label={'algorithm'}
+					value={algorithmType}
+					setValue={setAlgorithmType}
+				/>
+				<button onClick={runSearch}>Run</button>
+				<button onClick={resetGrid}>Reset Grid</button>
+				<button onClick={resetSearch}>Reset Run</button>
+			</form>
+
+			<form>
+				<FormInputNumber label={'rows'} value={rows} setValue={setRows} />
+				<FormInputNumber label={'columns'} value={columns} setValue={setColumns} />
+				<FormInputNumber label={'speed'} value={speed} setValue={setSpeed} />
+
+				<button onClick={resetGrid}>apply</button>
 			</form>
 		</div>
 	)
