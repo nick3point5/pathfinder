@@ -10,7 +10,6 @@
     "index": "node ./tools/indexer.js ./src/components -r && node ./tools/indexer.js ./src/modules -r && node ./tools/indexer.js ./src/pages -r"
   },
   "dependencies": {
-    "heap-js": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

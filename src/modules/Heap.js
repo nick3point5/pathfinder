@@ -10,23 +10,23 @@ export class Heap {
 		this.comparator = comparator
 	}
 	push(element) {
-		this.array.push(element)
-		this.siftDown(this.array.length - 1)
+		this.array.unshift(element)
+		this.siftDown(0)
 	}
 	pop() {
 		const top = this.array[0]
 		const bottom = this.array.pop()
 		if (this.array.length > 0) {
 			this.array[0] = bottom
-			this.siftUp(0)
+			this.siftDown(0)
 		}
 		return top
 	}
 	heapify(array) {
-		if (!Array.isArray(array))  {
-			console.log("not an array")
+		if (!Array.isArray(array)) {
+			console.log('not an array')
 			return
-		} 
+		}
 		for (let index = 0; index < array.length; index++) {
 			this.push(array[index])
 		}
@@ -39,9 +39,9 @@ export class Heap {
 			this.array[index] = bottom
 
 			if (this.comparator(bottom, node)) {
-				this.siftDown(index)
-			} else {
 				this.siftUp(index)
+			} else {
+				this.siftDown(index)
 			}
 		}
 	}
@@ -49,9 +49,9 @@ export class Heap {
 		return this.array.length
 	}
 	rescoreElement(node) {
-		this.siftDown(this.array.indexOf(node))
+		this.siftUp(this.array.indexOf(node))
 	}
-	siftDown(index) {
+	siftUp(index) {
 		const element = this.array[index]
 		while (index > 0) {
 			const parentIndex = ((index + 1) >> 1) - 1
@@ -65,11 +65,9 @@ export class Heap {
 			}
 		}
 	}
-	siftUp(index) {
-		// Look up the target element and its score.
+	siftDown(index) {
 		const length = this.array.length
 		const element = this.array[index]
-		// var elemScore = this.scoreFunction(element);
 
 		while (true) {
 			const childIndex2 = (index + 1) << 1
@@ -115,18 +113,28 @@ export class Heap {
 // 	{distance: 6},
 // 	{distance: 7},
 // ]
+// const sample3 = [
+// 	{ distance: 1, time: 1 },
+// 	{ distance: 1, time: 2 },
+// 	{ distance: 1, time: 3 },
+// 	{ distance: 1, time: 4 },
+// 	{ distance: 1, time: 5 },
+// 	{ distance: 1, time: 6 },
+// 	{ distance: 1, time: 7 },
+// 	{ distance: 1, time: 8 },
+// ]
 
-// const minHeap = new Heap((a, b)=>(a.distance < b.distance))
-// minHeap.heapify(sample2)
+// const minHeap = new Heap((a, b) => a.distance - b.distance)
+// minHeap.heapify(sample3)
 
-// // minHeap.push(2)
-// // minHeap.push(4)
-// // minHeap.push(3)
-// // minHeap.push(8)
-// // minHeap.push(5)
-// // minHeap.push(1)
-// // minHeap.push(6)
-// // minHeap.push(7)
+//= minHeap.push(2)
+// minHeap.push(4)
+// minHeap.push(3)
+// minHeap.push(8)
+// minHeap.push(5)
+// minHeap.push(1)
+// minHeap.push(6)
+// minHeap.push(7)
 
 // console.log(minHeap.pop())
 // console.log(minHeap.pop())

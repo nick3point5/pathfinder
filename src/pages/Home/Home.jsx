@@ -1,7 +1,7 @@
 import './Home.css'
-import { Grid } from '@/components'
+import { Grid, Toolbar } from '@/components'
 import { useRef, useState } from 'react'
-import { dijkstra, aStar, generateGrid, getPath, animateSearch } from '@/modules'
+import { generateGrid, getPath, animateSearch, algorithm } from '@/modules'
 
 export function Home(props) {
 	const [start, setStart] = useState([10, 5])
@@ -9,14 +9,15 @@ export function Home(props) {
 	const [rows, setRows] = useState(20)
 	const [columns, setColumns] = useState(50)
 	const [grid, setGrid] = useState(generateGrid(start, end, rows, columns))
-	const isMouseDown = useRef(false)
+	const [algorithmType, setAlgorithmType] = useState('dijkstra')
+	const mouseMode = useRef('off')
 	const isCalculated = useRef(false)
 	const timeouts = useRef([])
 
 	function runSearch() {
 		const startNode = grid[start[0]][start[1]]
 		const endNode = grid[end[0]][end[1]]
-		const visitedOrder = aStar(startNode, endNode,grid)
+		const visitedOrder = algorithm(startNode, endNode, grid, algorithmType)
 		const pathOrder = getPath(endNode)
 		isCalculated.current = true
 		animateSearch(visitedOrder, pathOrder, timeouts, 10)
@@ -40,29 +41,37 @@ export function Home(props) {
 		})
 
 		isCalculated.current = false
-		
+
 		const freshGrid = generateGrid(start, end, rows, columns)
 
 		setGrid(freshGrid)
 	}
 
 	function handleMouseDown() {
-		isMouseDown.current = true
+		// mouseMode.current = "wall"
 	}
-	
+
 	function handleMouseUp() {
-		isMouseDown.current = false
+		mouseMode.current = 'off'
 	}
 
 	return (
 		<div
-			className={`Dijkstra`}
+			className={`Home`}
 			onMouseDown={handleMouseDown}
 			onMouseUp={handleMouseUp}
 		>
-			<Grid isMouseDown={isMouseDown} grid={grid} isCalculated={isCalculated} />
-			<button onClick={runSearch}>Run</button>
-			<button onClick={resetGrid}>Reset</button>
+			<Toolbar
+				runSearch={runSearch}
+				resetGrid={resetGrid}
+			/>
+			<Grid
+				mouseMode={mouseMode}
+				grid={grid}
+				isCalculated={isCalculated}
+				setStart={setStart}
+				setEnd={setEnd}
+			/>
 		</div>
 	)
 }
