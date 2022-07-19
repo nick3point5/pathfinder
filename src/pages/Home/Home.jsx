@@ -20,7 +20,7 @@ export function Home(props) {
 		const visitedOrder = algorithm(startNode, endNode, grid, algorithmType)
 		const pathOrder = getPath(endNode)
 		isCalculated.current = true
-		animateSearch(visitedOrder, pathOrder, timeouts, 10)
+		animateSearch(visitedOrder, pathOrder, timeouts, 100)
 	}
 
 	function resetGrid() {
@@ -64,6 +64,12 @@ export function Home(props) {
 			<Toolbar
 				runSearch={runSearch}
 				resetGrid={resetGrid}
+				rows={rows}
+				setRows={setRows}
+				columns={columns}
+				setColumns={setColumns}
+				algorithmType={algorithmType}
+				setAlgorithmType={setAlgorithmType}
 			/>
 			<Grid
 				mouseMode={mouseMode}

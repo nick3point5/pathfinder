@@ -26,7 +26,7 @@ export function algorithm(startNode, endNode, grid, type) {
 			break
 	}
 
-	while (!!minHeap.size()) {
+	while (!!gridArray.length) {
 		gridArray.sort((current, next) => current.distance - next.distance)
 		const closestNode = gridArray.shift()
 		// const closestNode = minHeap.pop()
@@ -54,9 +54,9 @@ function updateUnvisitedNeighbors(node, minHeap, heuristic) {
 			heuristic(node, neighbor)
 		}
 	})
-	node.neighbors.forEach((neighbor) => {
-		minHeap.rescoreElement(neighbor)
-	})
+	// node.neighbors.forEach((neighbor) => {
+	// 	minHeap.rescoreElement(neighbor)
+	// })
 }
 
 function getUnVisitedNeighbors(node) {
