@@ -1,5 +1,5 @@
 export function animateSearch(visitedOrder, pathOrder, timeouts, speedFactor) {
-	const speed = 20 / speedFactor
+	const speed = 200 / speedFactor
 	const timeoutsArray = timeouts.current
 	for (let i = 0; i < visitedOrder.length; i++) {
 		const timeout = setTimeout(() => {

@@ -10,6 +10,7 @@ export function FormSelect({ label, value, setValue }) {
 		<div className={`FormSelect`}>
 			<label>{label}</label>
 			<select
+				className='form-select'
 				value={value}
 				onChange={(event) => {
 					handleInput(event, setValue)

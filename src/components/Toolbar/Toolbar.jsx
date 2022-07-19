@@ -68,27 +68,26 @@ export function Toolbar({ grid, setGrid, isCalculated, start, end }) {
 		isCalculated.current = false
 	}
 
-
 	return (
 		<div className={`Toolbar`}>
-			<form>
-				<FormSelect
-					label={'algorithm'}
-					value={algorithmType}
-					setValue={setAlgorithmType}
-				/>
-				<button onClick={runSearch}>Run</button>
-				<button onClick={resetGrid}>Reset Grid</button>
-				<button onClick={resetSearch}>Reset Run</button>
-			</form>
-
-			<form>
-				<FormInputNumber label={'rows'} value={rows} setValue={setRows} />
-				<FormInputNumber label={'columns'} value={columns} setValue={setColumns} />
-				<FormInputNumber label={'speed'} value={speed} setValue={setSpeed} />
-
-				<button onClick={resetGrid}>apply</button>
-			</form>
+			<div className="form-container">
+				<form>
+					<FormSelect
+						label={'Algorithm:'}
+						value={algorithmType}
+						setValue={setAlgorithmType}
+					/>
+				</form>
+				<button onClick={runSearch} className='run-button button'>Run Algorithm</button>
+				<button onClick={resetGrid} className='reset-grid-button  button'>Reset Grid</button>
+				<button onClick={resetSearch} className='reset-run-button button'>Reset Run</button>
+				<form>
+					<FormInputNumber label={'Number of Rows'} value={rows} setValue={setRows} />
+					<FormInputNumber label={'Number of Columns'} value={columns} setValue={setColumns} />
+					<FormInputNumber label={'Run Speed'} value={speed} setValue={setSpeed} />
+					<button onClick={resetGrid}className='apply-button button'>Apply</button>
+				</form>
+			</div>
 		</div>
 	)
 }

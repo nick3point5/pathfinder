@@ -1,25 +1,25 @@
 .Node {
-	border: solid black 2px;
+	border: solid #0A090C 2px;
 	width: 20px;
 	height: 20px;
 }
 
 .node-visited {
-	background-color:aqua;
+	background-color: #336699;
 }
 
 .node-path {
-	background-color: yellow
+	background-color: #ABC9FF
 }
 
 .start {
-	background-color: green;
+	background-color: #3CCF4E;
 }
 
 .end {
-	background-color: red;
+	background-color: #A53F2B;
 }
 
 .wall {
-	background-color: black;
+	background-color: #0A090C;
 }
