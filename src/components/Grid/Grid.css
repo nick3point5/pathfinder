@@ -1,4 +1,12 @@
 .Grid {
 	display: flex;
 	flex-direction: column;
+	overflow: scroll;
+}
+
+.node-grid {
+	max-width: 1000px;
+	max-height: 1000px;
+	display: flex;
+	flex-direction: column;
 }

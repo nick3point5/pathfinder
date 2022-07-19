@@ -9,6 +9,8 @@ export function  generateGrid(start, end, rows, columns) {
 			this.column = column
 			this.isStart = row === start[0] && column === start[1]
 			this.isEnd = row === end[0] && column === end[1]
+			// this.isStart = row === 0 && column === 0
+			// this.isEnd = row === rows-1 && column === columns-1
 			this.distance = Infinity
 			this.isVisited = false
 			this.isVisitable = false

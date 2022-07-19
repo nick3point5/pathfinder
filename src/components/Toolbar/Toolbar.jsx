@@ -5,7 +5,7 @@ import { FormInputNumber, FormSelect } from '@/components'
 
 export function Toolbar({ grid, setGrid, isCalculated, start, end }) {
 	const [rows, setRows] = useState(20)
-	const [columns, setColumns] = useState(50)
+	const [columns, setColumns] = useState(40)
 	const [algorithmType, setAlgorithmType] = useState('dijkstra')
 	const [speed, setSpeed] = useState(100)
 	const timeouts = useRef([])
@@ -15,7 +15,6 @@ export function Toolbar({ grid, setGrid, isCalculated, start, end }) {
 		resetSearch(event)
 		const startNode = grid[start[0]][start[1]]
 		const endNode = grid[end[0]][end[1]]
-		console.log(start)
 		const visitedOrder = algorithm(startNode, endNode, grid, algorithmType)
 		const pathOrder = getPath(endNode)
 		isCalculated.current = true

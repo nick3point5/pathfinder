@@ -3,11 +3,16 @@ import { Grid, Toolbar } from '@/components'
 import { useRef, useState } from 'react'
 import { generateGrid } from '@/modules'
 
+const initRows = 20
+const initColumns = 40
+const initStart = [0, 0]
+const initEnd = [initRows-1, initColumns-1]
+
 
 export function Home(props) {
-	const [start, setStart] = useState([10, 5])
-	const [end, setEnd] = useState([10, 45])
-	const [grid, setGrid] = useState(generateGrid(start, end, 20, 50))
+	const [start, setStart] = useState(initStart)
+	const [end, setEnd] = useState(initEnd)
+	const [grid, setGrid] = useState(generateGrid(start, end, initRows, initColumns))
 	const mouseMode = useRef('off')
 	const isCalculated = useRef(false)
 

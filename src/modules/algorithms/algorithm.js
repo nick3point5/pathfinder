@@ -8,7 +8,7 @@ export function algorithm(startNode, endNode, grid, type) {
 	const gridArray = []
 	grid.forEach((rows) => rows.forEach((item) => gridArray.push(item)))
 
-	minHeap.heapify(gridArray)
+	// minHeap.heapify(gridArray)
 
 	let heuristic
 	switch (type) {
