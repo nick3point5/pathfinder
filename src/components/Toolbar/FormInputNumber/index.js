@@ -1,1 +1,0 @@
-export { FormInputNumber } from './FormInputNumber';
