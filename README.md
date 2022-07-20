@@ -1,4 +1,4 @@
-#This is a path finding visualize written in React and JavaScript.
+#This is a path finding visualizer written in React and JavaScript.
 ---
 ##Algorithms
 ---
