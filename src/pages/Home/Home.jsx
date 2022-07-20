@@ -5,8 +5,8 @@ import { generateGrid } from '@/modules'
 
 const initRows = 20
 const initColumns = 40
-const initStart = [0, 0]
-const initEnd = [initRows - 1, initColumns - 1]
+const initStart = [5, 5]
+const initEnd = [initRows - 7, initColumns - 7]
 
 export function Home(props) {
 	const [start, setStart] = useState(initStart)
