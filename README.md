@@ -1,4 +1,4 @@
-#This is a path finding visualizer written in React and JavaScript.
+#This is a path finding visualizer written in React and JavaScript. See the project at https://nick3point5.github.io/pathfinder/
 ---
 ##Algorithms
 ---
